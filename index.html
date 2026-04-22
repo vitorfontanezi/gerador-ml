@@ -8,44 +8,34 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --bg:#F7F6F2;
-  --surface:#FFFFFF;
-  --border:#E2E0D8;
-  --border-strong:#C8C5BB;
-  --text:#1A1915;
-  --text-muted:#6B6860;
-  --text-faint:#A8A59E;
-  --accent:#1A1915;
-  --accent-fg:#F7F6F2;
-  --tag-bg:#EDECEA;
-  --tag-active:#1A1915;
-  --tag-active-fg:#F7F6F2;
-  --info-bg:#EEF4FF;
-  --info-text:#2B5FC7;
-  --warn-bg:#FFF8E6;
-  --warn-text:#92600A;
-  --success-bg:#EDFAF3;
-  --success-text:#1A7A45;
-  --mono:'DM Mono',monospace;
-  --sans:'Inter',sans-serif;
-  --display:'Syne',sans-serif;
-  --radius:10px;
-  --radius-sm:6px;
+  --bg:#F7F6F2;--surface:#FFFFFF;--border:#E2E0D8;--border-strong:#C8C5BB;
+  --text:#1A1915;--text-muted:#6B6860;--text-faint:#A8A59E;
+  --tag-bg:#EDECEA;--tag-active:#1A1915;--tag-active-fg:#F7F6F2;
+  --info-bg:#EEF4FF;--info-text:#2B5FC7;
+  --warn-bg:#FFF8E6;--warn-text:#92600A;
+  --success-bg:#EDFAF3;--success-text:#1A7A45;
+  --mono:'DM Mono',monospace;--sans:'Inter',sans-serif;--display:'Syne',sans-serif;
+  --radius:10px;--radius-sm:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh}
-
-/* HEADER */
 header{background:var(--text);color:var(--bg);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between}
 header h1{font-family:var(--display);font-size:20px;font-weight:700;letter-spacing:-.02em}
 header span{font-family:var(--mono);font-size:11px;opacity:.5}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
 
-/* LAYOUT */
-.container{max-width:860px;margin:0 auto;padding:2rem 1.5rem}
+/* MODE SWITCHER */
+.mode-row{display:flex;gap:8px;margin-bottom:1.5rem}
+.mode-btn{flex:1;padding:14px 16px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--surface);cursor:pointer;text-align:left;transition:all .15s}
+.mode-btn:hover{border-color:var(--border-strong)}
+.mode-btn.on{border-color:var(--text);background:var(--text);color:var(--bg)}
+.mode-btn .mb-title{font-family:var(--display);font-size:14px;font-weight:600;display:block;margin-bottom:2px}
+.mode-btn .mb-desc{font-size:11px;opacity:.6;display:block}
+.mode-btn.on .mb-desc{opacity:.5}
 
 /* TABS */
 .tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.5rem}
-.tab{padding:10px 18px;font-size:13px;font-family:var(--sans);font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s}
+.tab{padding:10px 18px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s}
 .tab:hover{color:var(--text)}
 .tab.on{color:var(--text);border-bottom-color:var(--text)}
 .pane{display:none}.pane.on{display:block}
@@ -58,12 +48,7 @@ header span{font-family:var(--mono);font-size:11px;opacity:.5}
 .field{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
 .field:last-child{margin-bottom:0}
 .field label{font-size:12px;font-weight:500;color:var(--text-muted)}
-input[type=text],input[type=number],select,textarea{
-  font-size:13px;font-family:var(--sans);color:var(--text);
-  background:var(--bg);border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:8px 11px;width:100%;
-  outline:none;transition:border-color .15s;
-}
+input[type=text],input[type=number],select,textarea{font-size:13px;font-family:var(--sans);color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 11px;width:100%;outline:none;transition:border-color .15s}
 input:focus,select:focus,textarea:focus{border-color:var(--border-strong)}
 textarea{resize:vertical;min-height:60px;line-height:1.5}
 .hint{font-size:11px;color:var(--text-faint)}
@@ -75,9 +60,6 @@ textarea{resize:vertical;min-height:60px;line-height:1.5}
 .tag{background:var(--tag-bg);border:1px solid transparent;border-radius:20px;padding:5px 13px;font-size:12px;font-weight:500;cursor:pointer;color:var(--text-muted);user-select:none;transition:all .12s}
 .tag:hover{border-color:var(--border-strong);color:var(--text)}
 .tag.on{background:var(--tag-active);color:var(--tag-active-fg);border-color:var(--tag-active)}
-.tag-custom{display:flex;align-items:center;gap:5px}
-.tag-custom .rm{font-size:15px;opacity:.6;line-height:1}
-.tag-custom .rm:hover{opacity:1}
 .qty-add{display:flex;gap:8px;margin-top:10px;align-items:center}
 .qty-add input{width:170px}
 
@@ -89,10 +71,9 @@ textarea{resize:vertical;min-height:60px;line-height:1.5}
 .btn-outline:hover{background:var(--tag-bg)}
 .btn-block{width:100%;justify-content:center;margin-top:6px}
 .btn-row{display:flex;gap:8px;margin-top:8px}
-.btn-row .btn-outline{flex-shrink:0}
 .btn-row .grow{flex:1;justify-content:center}
 
-/* URL INPUTS */
+/* URLs */
 .url-list{display:flex;flex-direction:column;gap:6px;margin-top:8px}
 .url-row{display:flex;gap:6px;align-items:center}
 .url-row input{flex:1}
@@ -110,59 +91,74 @@ textarea{resize:vertical;min-height:60px;line-height:1.5}
 .note{border-radius:var(--radius-sm);padding:9px 13px;font-size:12px;margin-bottom:4px}
 .note-info{background:var(--info-bg);color:var(--info-text)}
 .note-warn{background:var(--warn-bg);color:var(--warn-text)}
+.stella-note{background:var(--info-bg);border-radius:var(--radius-sm);padding:8px 12px;font-size:12px;color:var(--info-text);margin-top:8px}
 
 /* RESULT */
-.result-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.result-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .badge{display:inline-block;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:500}
 .badge-info{background:var(--info-bg);color:var(--info-text)}
 .badge-warn{background:var(--warn-bg);color:var(--warn-text)}
 .copy-btn{margin-left:auto;font-size:12px;color:var(--text-muted);background:none;border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 13px;cursor:pointer}
 .copy-btn:hover{background:var(--tag-bg);color:var(--text)}
 .copy-btn.done{background:var(--success-bg);color:var(--success-text);border-color:transparent}
-
 .preview-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-sm)}
 table{width:100%;border-collapse:collapse;font-size:10px}
 th{background:var(--bg);padding:5px 8px;text-align:left;border-bottom:1px solid var(--border);font-weight:600;white-space:nowrap;color:var(--text-muted);font-family:var(--mono)}
 td{padding:5px 8px;border-bottom:1px solid var(--border);white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;font-family:var(--mono);color:var(--text)}
 tr:last-child td{border-bottom:none}
 tr:nth-child(even) td{background:var(--bg)}
-
 .ean-list{margin-top:4px}
 .ean-row{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:6px 0;gap:12px}
 .ean-row:last-child{border-bottom:none}
 .ean-titulo{font-size:11px;color:var(--text-muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ean-code{font-family:var(--mono);font-size:12px;font-weight:500;flex-shrink:0}
 
-/* DIVIDER */
-.sep{height:1px;background:var(--border);margin:16px 0}
+/* FOTO BATCH */
+.foto-batch-area textarea{min-height:80px}
+.fotos-parsed{margin-top:8px;display:flex;flex-direction:column;gap:4px}
+.foto-item{display:flex;align-items:center;gap:8px;font-size:11px;font-family:var(--mono);color:var(--text-muted);background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:5px 8px}
+.foto-num{font-weight:600;color:var(--text);min-width:20px}
 
-/* RESPONSIVE */
 @media(max-width:600px){
   .grid2,.grid3{grid-template-columns:1fr}
   header{padding:1rem 1.25rem}
   .container{padding:1.25rem 1rem}
   .tab{padding:8px 12px;font-size:12px}
+  .mode-row{flex-direction:column}
 }
 </style>
 </head>
 <body>
-
 <header>
   <h1>Gerador de Anúncios ML</h1>
   <span>Lúmnia Iluminação</span>
 </header>
 
 <div class="container">
+
+<!-- MODE SELECTOR -->
+<div class="mode-row">
+  <button class="mode-btn on" id="mode-catalogo" onclick="setMode('catalogo')">
+    <span class="mb-title">Produto de catálogo</span>
+    <span class="mb-desc">Planilha Criar Produto — cadastro no catálogo ML</span>
+  </button>
+  <button class="mode-btn" id="mode-anuncio" onclick="setMode('anuncio')">
+    <span class="mb-title">Anúncio convencional</span>
+    <span class="mb-desc">Planilha Anunciar — anúncio direto com preço e estoque</span>
+  </button>
+</div>
+
+<!-- =============================== CATÁLOGO =============================== -->
+<div id="view-catalogo">
   <div class="tabs">
-    <button class="tab on" onclick="go(0)">1. Dados</button>
-    <button class="tab" onclick="go(1)">2. Fotos</button>
-    <button class="tab" onclick="go(2)">3. Medidas</button>
-    <button class="tab" onclick="go(3)">4. Gerar</button>
+    <button class="tab on" onclick="goC(0)">1. Dados</button>
+    <button class="tab" onclick="goC(1)">2. Fotos</button>
+    <button class="tab" onclick="goC(2)">3. Medidas</button>
+    <button class="tab" onclick="goC(3)">4. Gerar</button>
   </div>
 
-  <!-- PASSO 1 -->
-  <div id="p0" class="pane on">
-
+  <!-- C-PASSO 1 -->
+  <div id="cp0" class="pane on">
     <div class="card">
       <div class="card-label">Potência da lâmpada</div>
       <div class="tags" id="pot-tags">
@@ -171,8 +167,6 @@ tr:nth-child(even) td{background:var(--bg)}
         <span class="tag" data-pot="7" onclick="selPot(this)">7W</span>
       </div>
     </div>
-
-    <!-- PADRÃO (4.8W / 7W) -->
     <div id="campos-padrao">
       <div class="card">
         <div class="card-label">Nome do produto</div>
@@ -183,7 +177,7 @@ tr:nth-child(even) td{background:var(--bg)}
         <div class="field">
           <label>Parte da lâmpada (após o "+")</label>
           <input type="text" id="nome_lamp" value="Lâmpadas Mr16" oninput="updatePrev()"/>
-          <span class="hint">Ex: "Lâmpadas Mr16" → Kit 16x [spot] + 16x Lâmpadas Mr16 Cor Preto Branco Quente</span>
+          <span class="hint">Resultado: Kit 16x [spot] + 16x [lâmpada] Cor Preto Branco Quente</span>
         </div>
         <div id="titulo-prev" class="titulo-prev"></div>
       </div>
@@ -199,14 +193,11 @@ tr:nth-child(even) td{background:var(--bg)}
         </div>
       </div>
     </div>
-
-    <!-- STELLA (6W) -->
     <div id="campos-stella" style="display:none">
-      <div class="note note-info" style="margin-bottom:8px">Stella 6W usa título e descrição próprios.</div>
-      <div class="card">
-        <div class="card-label">Nome do produto — Stella</div>
+      <div class="stella-note">Stella 6W usa título e descrição próprios.</div>
+      <div class="card" style="margin-top:8px">
+        <div class="card-label">Nome — Stella</div>
         <div class="field">
-          <label>Parte do spot</label>
           <input type="text" id="stella_spot" value="Spot Plafon Sobrepor Quadrado Box Direcionável Minimalista Moderno 10cm Gu10" oninput="updatePrev()"/>
           <span class="hint">Kit 4x [spot] + 4x Lâmpada MR16 6W Stella Cor Branco / Branco Neutro 4000K</span>
         </div>
@@ -224,12 +215,10 @@ tr:nth-child(even) td{background:var(--bg)}
         </div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-label">Prévia da descrição</div>
       <div id="desc-prev" class="desc-prev"></div>
     </div>
-
     <div class="card">
       <div class="card-label">Quantidades de kit</div>
       <div class="tags" id="qty-tags">
@@ -252,7 +241,6 @@ tr:nth-child(even) td{background:var(--bg)}
       </div>
       <span class="hint" style="margin-top:4px;display:block">Digite qualquer número e pressione Enter ou clique em Adicionar.</span>
     </div>
-
     <div class="card">
       <div class="card-label">Cores do spot</div>
       <div class="tags" id="cor-tags">
@@ -262,7 +250,6 @@ tr:nth-child(even) td{background:var(--bg)}
         <span class="tag" data-v="Dourado" onclick="tog(this)">Dourado</span>
       </div>
     </div>
-
     <div class="card">
       <div class="card-label">Temperaturas de cor</div>
       <div class="tags" id="temp-tags">
@@ -271,21 +258,35 @@ tr:nth-child(even) td{background:var(--bg)}
         <span class="tag on" data-v="Branco-frio" onclick="tog(this)">Branco-frio (6500K)</span>
       </div>
     </div>
-
-    <button class="btn btn-outline btn-block" onclick="go(1)">Próximo: Fotos →</button>
+    <button class="btn btn-outline btn-block" onclick="goC(1)">Próximo: Fotos →</button>
   </div>
 
-  <!-- PASSO 2 -->
-  <div id="p1" class="pane">
-    <div id="foto-sections"></div>
+  <!-- C-PASSO 2 -->
+  <div id="cp1" class="pane">
+    <div class="card foto-batch-area">
+      <div class="card-label">Cole os links das fotos — Preto</div>
+      <p class="hint" style="margin-bottom:8px">Cole todos os links de uma vez, separados por vírgula (como vêm do ML):</p>
+      <textarea id="batch-preto" placeholder="https://url1.jpg,https://url2.jpg,https://url3.jpg" oninput="parseBatch('preto')"></textarea>
+      <div id="parsed-preto" class="fotos-parsed"></div>
+    </div>
+    <div class="card foto-batch-area">
+      <div class="card-label">Cole os links das fotos — Branco</div>
+      <p class="hint" style="margin-bottom:8px">Cole todos os links de uma vez, separados por vírgula:</p>
+      <textarea id="batch-branco" placeholder="https://url1.jpg,https://url2.jpg,https://url3.jpg" oninput="parseBatch('branco')"></textarea>
+      <div id="parsed-branco" class="fotos-parsed"></div>
+    </div>
+    <div class="card foto-batch-area" id="batch-outros-card" style="display:none">
+      <div class="card-label">Cole os links das fotos — Outras cores</div>
+      <div id="batch-outros-content"></div>
+    </div>
     <div class="btn-row">
-      <button class="btn btn-outline" onclick="go(0)">← Voltar</button>
-      <button class="btn btn-outline grow" onclick="go(2)">Próximo: Medidas →</button>
+      <button class="btn btn-outline" onclick="goC(0)">← Voltar</button>
+      <button class="btn btn-outline grow" onclick="goC(2)">Próximo: Medidas →</button>
     </div>
   </div>
 
-  <!-- PASSO 3 -->
-  <div id="p2" class="pane">
+  <!-- C-PASSO 3 -->
+  <div id="cp2" class="pane">
     <div class="card">
       <div class="card-label">Dimensões do produto (cm)</div>
       <div class="grid3">
@@ -295,38 +296,228 @@ tr:nth-child(even) td{background:var(--bg)}
       </div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-outline" onclick="go(1)">← Voltar</button>
-      <button class="btn btn-outline grow" onclick="go(3)">Próximo: Gerar →</button>
+      <button class="btn btn-outline" onclick="goC(1)">← Voltar</button>
+      <button class="btn btn-outline grow" onclick="goC(3)">Próximo: Gerar →</button>
     </div>
   </div>
 
-  <!-- PASSO 4 -->
-  <div id="p3" class="pane">
-    <div id="result-area" style="display:none">
+  <!-- C-PASSO 4 -->
+  <div id="cp3" class="pane">
+    <div id="c-result-area" style="display:none">
       <div class="result-header">
-        <span id="badge-count" class="badge badge-info"></span>
-        <span id="badge-warn" class="badge badge-warn" style="display:none">⚠ máximo 25 no ML</span>
-        <button class="copy-btn" id="copy-btn" onclick="copiar()">Copiar tudo (TSV)</button>
+        <span id="c-badge-count" class="badge badge-info"></span>
+        <span id="c-badge-warn" class="badge badge-warn" style="display:none">⚠ máximo 25 no ML</span>
+        <button class="copy-btn" id="c-copy-btn" onclick="copiarC()">Copiar tudo (TSV)</button>
       </div>
       <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Prévia das primeiras linhas:</p>
-      <div class="preview-wrap"><div id="preview-tbl"></div></div>
-      <p style="font-size:11px;color:var(--text-faint);margin-top:8px">Cole na planilha do ML a partir da linha de dados (linha 5, célula A) com Ctrl+V / Cmd+V.</p>
-      <div class="sep"></div>
-      <div class="card-label" style="margin-bottom:8px">EANs gerados <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-faint);font-family:var(--sans)">(aleatórios — substitua por EANs reais antes de enviar)</span></div>
-      <div class="ean-list" id="ean-list"></div>
+      <div class="preview-wrap"><div id="c-preview-tbl"></div></div>
+      <p style="font-size:11px;color:var(--text-faint);margin-top:8px">Cole na planilha "Criar Produto" a partir da linha de dados (linha 5, célula A).</p>
+      <div style="margin-top:12px">
+        <div class="card-label" style="margin-bottom:8px">EANs gerados <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-faint);font-family:var(--sans)">(aleatórios — substitua por EANs reais antes de enviar)</span></div>
+        <div class="ean-list" id="c-ean-list"></div>
+      </div>
     </div>
-    <div id="gen-area">
-      <button class="btn btn-primary btn-block" onclick="gerar()">Gerar planilha</button>
-    </div>
-    <div style="margin-top:8px">
-      <button class="btn btn-outline" onclick="go(2)">← Voltar</button>
-    </div>
+    <div id="c-gen-area"><button class="btn btn-primary btn-block" onclick="gerarCatalogo()">Gerar planilha</button></div>
+    <div style="margin-top:8px"><button class="btn btn-outline" onclick="goC(2)">← Voltar</button></div>
   </div>
 </div>
 
+<!-- =============================== ANÚNCIO =============================== -->
+<div id="view-anuncio" style="display:none">
+  <div class="tabs">
+    <button class="tab on" onclick="goA(0)">1. Dados</button>
+    <button class="tab" onclick="goA(1)">2. Fotos</button>
+    <button class="tab" onclick="goA(2)">3. Embalagem</button>
+    <button class="tab" onclick="goA(3)">4. Gerar</button>
+  </div>
+
+  <!-- A-PASSO 1 -->
+  <div id="ap0" class="pane on">
+    <div class="card">
+      <div class="card-label">Potência da lâmpada</div>
+      <div class="tags" id="a-pot-tags">
+        <span class="tag on" data-pot="4.8" onclick="aSelPot(this)">4,8W</span>
+        <span class="tag" data-pot="6" onclick="aSelPot(this)">6W — Stella</span>
+        <span class="tag" data-pot="7" onclick="aSelPot(this)">7W</span>
+      </div>
+    </div>
+    <div id="a-campos-padrao">
+      <div class="card">
+        <div class="card-label">Nome do produto</div>
+        <div class="field">
+          <label>Parte do spot (antes do "+")</label>
+          <input type="text" id="a-nome_spot" value="Spots Quadrado Sobrepor Direcionável 10x10cm Gu10 Lúmnia Iluminação" oninput="aUpdatePrev()"/>
+        </div>
+        <div class="field">
+          <label>Parte da lâmpada (após o "+")</label>
+          <input type="text" id="a-nome_lamp" value="Lâmpadas Mr16" oninput="aUpdatePrev()"/>
+        </div>
+        <div id="a-titulo-prev" class="titulo-prev"></div>
+      </div>
+    </div>
+    <div id="a-campos-stella" style="display:none">
+      <div class="stella-note">Stella 6W usa título próprio.</div>
+      <div class="card" style="margin-top:8px">
+        <div class="card-label">Nome — Stella</div>
+        <input type="text" id="a-stella_spot" value="Spot Plafon Sobrepor Quadrado Box Direcionável Minimalista Moderno 10cm Gu10" oninput="aUpdatePrev()"/>
+        <div id="a-titulo-prev-stella" class="titulo-prev" style="margin-top:8px"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Informações do anúncio</div>
+      <div class="grid2" style="margin-bottom:12px">
+        <div class="field"><label>Marca</label><input type="text" id="a-marca" value="Lúmnia Iluminação"/></div>
+        <div class="field"><label>Modelo</label><input type="text" id="a-modelo" value="Luminária Plafon Sobrepor"/></div>
+      </div>
+      <div class="grid2" style="margin-bottom:12px">
+        <div class="field"><label>Preço (R$)</label><input type="number" id="a-preco" value="" placeholder="Ex: 189.90" step="0.01"/></div>
+        <div class="field"><label>Estoque (unidades)</label><input type="number" id="a-estoque" value="10" min="1"/></div>
+      </div>
+      <div class="grid2" style="margin-bottom:12px">
+        <div class="field"><label>Voltagem</label><input type="text" id="a-voltagem" value="127/220V"/></div>
+        <div class="field"><label>Tipo de fonte de luz</label><input type="text" id="a-tipo_luz" value="Gu10, LED, MR16"/></div>
+      </div>
+      <div class="grid2">
+        <div class="field">
+          <label>Formato de venda</label>
+          <select id="a-formato"><option value="Kit">Kit</option><option value="Unidade">Unidade</option></select>
+        </div>
+        <div class="field">
+          <label>Tipo de garantia</label>
+          <select id="a-garantia-tipo"><option>Garantia do vendedor</option><option>Garantia de fábrica</option><option>Sem garantia</option></select>
+        </div>
+      </div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="field">
+          <label>Tempo de garantia</label>
+          <input type="number" id="a-garantia-tempo" value="3" min="0"/>
+        </div>
+        <div class="field">
+          <label>Unidade de garantia</label>
+          <select id="a-garantia-unidade"><option>meses</option><option>anos</option><option>dias</option></select>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Quantidades de kit</div>
+      <div class="tags" id="a-qty-tags">
+        <span class="tag" data-v="1" onclick="aTogQty(this)">1x</span>
+        <span class="tag" data-v="2" onclick="aTogQty(this)">2x</span>
+        <span class="tag" data-v="4" onclick="aTogQty(this)">4x</span>
+        <span class="tag" data-v="6" onclick="aTogQty(this)">6x</span>
+        <span class="tag" data-v="8" onclick="aTogQty(this)">8x</span>
+        <span class="tag" data-v="10" onclick="aTogQty(this)">10x</span>
+        <span class="tag" data-v="12" onclick="aTogQty(this)">12x</span>
+        <span class="tag" data-v="14" onclick="aTogQty(this)">14x</span>
+        <span class="tag on" data-v="16" onclick="aTogQty(this)">16x</span>
+        <span class="tag" data-v="18" onclick="aTogQty(this)">18x</span>
+        <span class="tag" data-v="20" onclick="aTogQty(this)">20x</span>
+        <span class="tag" data-v="24" onclick="aTogQty(this)">24x</span>
+      </div>
+      <div class="qty-add">
+        <input type="number" id="a-qty-input" min="1" max="999" placeholder="Outra quantidade"/>
+        <button class="btn btn-outline" onclick="aAddQty()">+ Adicionar</button>
+      </div>
+      <span class="hint" style="margin-top:4px;display:block">Enter ou clique em Adicionar.</span>
+    </div>
+    <div class="card">
+      <div class="card-label">Cores do spot</div>
+      <div class="tags" id="a-cor-tags">
+        <span class="tag on" data-v="Preto" onclick="aTog(this)">Preto</span>
+        <span class="tag on" data-v="Branco" onclick="aTog(this)">Branco</span>
+        <span class="tag" data-v="Cinza" onclick="aTog(this)">Cinza</span>
+        <span class="tag" data-v="Dourado" onclick="aTog(this)">Dourado</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Temperaturas de cor</div>
+      <div class="tags" id="a-temp-tags">
+        <span class="tag on" data-v="Branco-quente" onclick="aTog(this)">Branco-quente (3000K)</span>
+        <span class="tag on" data-v="Branco-neutro" onclick="aTog(this)">Branco-neutro (4000K)</span>
+        <span class="tag on" data-v="Branco-frio" onclick="aTog(this)">Branco-frio (6500K)</span>
+      </div>
+    </div>
+    <button class="btn btn-outline btn-block" onclick="goA(1)">Próximo: Fotos →</button>
+  </div>
+
+  <!-- A-PASSO 2 -->
+  <div id="ap1" class="pane">
+    <div class="card foto-batch-area">
+      <div class="card-label">Cole os links das fotos — Preto</div>
+      <p class="hint" style="margin-bottom:8px">Cole todos os links separados por vírgula:</p>
+      <textarea id="a-batch-preto" placeholder="https://url1.jpg,https://url2.jpg,..." oninput="aParseB('preto')"></textarea>
+      <div id="a-parsed-preto" class="fotos-parsed"></div>
+    </div>
+    <div class="card foto-batch-area">
+      <div class="card-label">Cole os links das fotos — Branco</div>
+      <textarea id="a-batch-branco" placeholder="https://url1.jpg,https://url2.jpg,..." oninput="aParseB('branco')"></textarea>
+      <div id="a-parsed-branco" class="fotos-parsed"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goA(0)">← Voltar</button>
+      <button class="btn btn-outline grow" onclick="goA(2)">Próximo: Embalagem →</button>
+    </div>
+  </div>
+
+  <!-- A-PASSO 3 -->
+  <div id="ap2" class="pane">
+    <div class="card">
+      <div class="card-label">Medidas e peso da embalagem de envio</div>
+      <p class="hint" style="margin-bottom:12px">Meça e pese o pacote já embalado, como vai enviar.</p>
+      <div class="grid3" style="margin-bottom:12px">
+        <div class="field"><label>Largura (cm)</label><input type="number" id="a-larg" value="15" step="1"/></div>
+        <div class="field"><label>Altura (cm)</label><input type="number" id="a-alt" value="10" step="1"/></div>
+        <div class="field"><label>Profundidade (cm)</label><input type="number" id="a-prof" value="15" step="1"/></div>
+      </div>
+      <div class="field" style="max-width:200px">
+        <label>Peso físico (kg)</label>
+        <input type="number" id="a-peso" value="0.5" step="0.01"/>
+        <span class="hint">Com até 3 casas decimais</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="goA(1)">← Voltar</button>
+      <button class="btn btn-outline grow" onclick="goA(3)">Próximo: Gerar →</button>
+    </div>
+  </div>
+
+  <!-- A-PASSO 4 -->
+  <div id="ap3" class="pane">
+    <div id="a-result-area" style="display:none">
+      <div class="result-header">
+        <span id="a-badge-count" class="badge badge-info"></span>
+        <button class="copy-btn" id="a-copy-btn" onclick="copiarA()">Copiar tudo (TSV)</button>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-bottom:6px">Prévia das primeiras linhas:</p>
+      <div class="preview-wrap"><div id="a-preview-tbl"></div></div>
+      <p style="font-size:11px;color:var(--text-faint);margin-top:8px">Cole na planilha "Anunciar" a partir da linha de dados (linha 5, célula A).</p>
+      <div style="margin-top:12px">
+        <div class="card-label" style="margin-bottom:8px">EANs gerados <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-faint);font-family:var(--sans)">(aleatórios — substitua por EANs reais)</span></div>
+        <div class="ean-list" id="a-ean-list"></div>
+      </div>
+    </div>
+    <div id="a-gen-area"><button class="btn btn-primary btn-block" onclick="gerarAnuncio()">Gerar planilha</button></div>
+    <div style="margin-top:8px"><button class="btn btn-outline" onclick="goA(2)">← Voltar</button></div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
 <script>
-var urls={};
-var tsv='';
+// ─── MODE ───
+var currentMode='catalogo';
+function setMode(m){
+  currentMode=m;
+  document.getElementById('mode-catalogo').classList.toggle('on',m==='catalogo');
+  document.getElementById('mode-anuncio').classList.toggle('on',m==='anuncio');
+  document.getElementById('view-catalogo').style.display=m==='catalogo'?'block':'none';
+  document.getElementById('view-anuncio').style.display=m==='anuncio'?'block':'none';
+}
+
+// ─── SHARED DATA ───
+var cUrls={preto:[],branco:[],cinza:[],dourado:[]};
+var aUrls={preto:[],branco:[],cinza:[],dourado:[]};
+var cTsv='',aTsv='';
 
 var TEMPS=[
   {label:'Branco-quente',k:3000,word:'Branco Quente',sw:'Branco Quente 3000K'},
@@ -334,121 +525,74 @@ var TEMPS=[
   {label:'Branco-frio',  k:6500,word:'Branco Frio',  sw:'Branco Frio 6500K'}
 ];
 
-function desc48(n){
-  return n+'x SPOT DE SOBREPOR 10x10 QUADRADO PARA LÂMPADA DICROICA MR16\n'+
-    n+'x SOQUETES INCLUSOS\n'+
-    n+'x LÂMPADA LED DICROICA MR16 GU10 4,8W\n\n'+
-    '-- ESPECIFICAÇÕES SPOT --\n\n'+
-    'Dimensões Quadrado: 10x10x10mm\n'+
-    'Peso: 150g\n'+
-    'Direcionamento do facho através aro direcionador\n'+
-    'Produto feito em ABS, não amarela, não amassa, não oxida e não risca.\n\n'+
-    '-- INFORMAÇÕES TÉCNICAS DA LÂMPADA --\n\n'+
-    'Luz Quente - 2700k - Fluxo Luminoso: 345lm\n'+
-    'Luz Neutra - 4000k - Fluxo Luminoso: 380lm\n'+
-    'Luz Fria - 6500k - Fluxo Luminoso: 390lm\n\n'+
-    'Potência: 4,8W\n'+
-    'Ângulo: 24º\n'+
-    'Intensidade Luminosa: 1200cd\n'+
-    'IRC: >=80\n'+
-    'Dimerizável: Não\n'+
-    'Nível de Proteção: IP40\n'+
-    'Soquete: Gu10\n'+
-    'Tamanho Produto: D50*H56mm\n'+
-    'Peso Produto: 50g\n'+
-    'Tensão: Bivolt (110V/220V)\n'+
-    'Equiv. Incandescente: 35W';
-}
-
-function desc6(n){
-  return n+'x SPOT DE SOBREPOR QUADRADO PARA LÂMPADA DICROICA MR16\n'+
-    n+'x SOQUETES INCLUSOS\n'+
-    n+'x LÂMPADA LED DICROICA MR16 GU10 6W\n\n'+
-    '-- ESPECIFICAÇÕES SPOT --\n\n'+
-    'Dimensões Quadrado: 105x105x105mm\n'+
-    'Peso: 120g\n'+
-    'Direcionamento do facho através do aro direcionador\n'+
-    'Produto feito em ABS, não amarela, não amassa, não oxida e não risca.\n\n'+
-    '-- INFORMAÇÕES TÉCNICAS DA LÂMPADA --\n\n'+
-    'Luz Quente - 3000K\n'+
-    'Fluxo Luminoso: 450 lumens\n'+
-    'Intensidade Luminosa: 900\n\n'+
-    'Luz Neutra - 4000K\n'+
-    'Fluxo Luminoso: 500 lumens\n'+
-    'Intensidade Luminosa: 1000\n\n'+
-    'Potência: 6W\n'+
-    'Ângulo: 36º\n'+
-    'IRC: >=80\n'+
-    'Dimerizável: Não\n'+
-    'Soquete: Gu10\n'+
-    'Tensão: Bivolt (110V/220V)\n'+
-    'Garantia: 2 anos\n'+
-    'Produto certificado: Sim';
-}
-
-function desc7(n){
-  return n+'x SPOT DE SOBREPOR 10x10 QUADRADO PARA LÂMPADA DICROICA MR16\n'+
-    n+'x SOQUETES INCLUSOS\n'+
-    n+'x LÂMPADA LED DICROICA MR16 GU10 7W\n\n'+
-    '-- ESPECIFICAÇÕES SPOT --\n\n'+
-    'Dimensões Quadrado: 10x10x10mm\n'+
-    'Peso: 150g\n'+
-    'Direcionamento do facho através aro direcionador\n'+
-    'Produto feito em ABS, não amarela, não amassa, não oxida e não risca.\n\n'+
-    '-- INFORMAÇÕES TÉCNICAS DA LÂMPADA --\n\n'+
-    'Luz Quente - 2700k/3000k (Enviado conforme disponibilidade)\n'+
-    'Fluxo Luminoso: 450lm\n'+
-    'Luz Neutra - 4000k\n'+
-    'Fluxo Luminoso: 450lm\n'+
-    'Luz Fria - 6500k\n'+
-    'Fluxo Luminoso: 450lm\n\n'+
-    'Potência: 6,5W ou 7W dependendo da disponibilidade\n'+
-    'Ângulo: 24º\n'+
-    'Intensidade Luminosa: 1200cd\n'+
-    'IRC: >=80\n'+
-    'Dimerizável: Não\n'+
-    'Nível de Proteção: IP40\n'+
-    'Soquete: Gu10\n'+
-    'Tamanho Produto: D50*H56mm\n'+
-    'Peso Produto: 50g\n'+
-    'Tensão: Bivolt (110V/220V)\n'+
-    'Equiv. Incandescente: 35W';
-}
+function desc48(n){return n+'x SPOT DE SOBREPOR 10x10 QUADRADO PARA LÂMPADA DICROICA MR16\n'+n+'x SOQUETES INCLUSOS\n'+n+'x LÂMPADA LED DICROICA MR16 GU10 4,8W\n\n-- ESPECIFICAÇÕES SPOT --\n\nDimensões Quadrado: 10x10x10mm\nPeso: 150g\nDirecionamento do facho através aro direcionador\nProduto feito em ABS, não amarela, não amassa, não oxida e não risca.\n\n-- INFORMAÇÕES TÉCNICAS DA LÂMPADA --\n\nLuz Quente - 2700k - Fluxo Luminoso: 345lm\nLuz Neutra - 4000k - Fluxo Luminoso: 380lm\nLuz Fria - 6500k - Fluxo Luminoso: 390lm\n\nPotência: 4,8W\nÂngulo: 24º\nIntensidade Luminosa: 1200cd\nIRC: >=80\nDimerizável: Não\nNível de Proteção: IP40\nSoquete: Gu10\nTamanho Produto: D50*H56mm\nPeso Produto: 50g\nTensão: Bivolt (110V/220V)\nEquiv. Incandescente: 35W';}
+function desc6(n){return n+'x SPOT DE SOBREPOR QUADRADO PARA LÂMPADA DICROICA MR16\n'+n+'x SOQUETES INCLUSOS\n'+n+'x LÂMPADA LED DICROICA MR16 GU10 6W\n\n-- ESPECIFICAÇÕES SPOT --\n\nDimensões Quadrado: 105x105x105mm\nPeso: 120g\nDirecionamento do facho através do aro direcionador\nProduto feito em ABS, não amarela, não amassa, não oxida e não risca.\n\n-- INFORMAÇÕES TÉCNICAS DA LÂMPADA --\n\nLuz Quente - 3000K\nFluxo Luminoso: 450 lumens\nIntensidade Luminosa: 900\n\nLuz Neutra - 4000K\nFluxo Luminoso: 500 lumens\nIntensidade Luminosa: 1000\n\nPotência: 6W\nÂngulo: 36º\nIRC: >=80\nDimerizável: Não\nSoquete: Gu10\nTensão: Bivolt (110V/220V)\nGarantia: 2 anos\nProduto certificado: Sim';}
+function desc7(n){return n+'x SPOT DE SOBREPOR 10x10 QUADRADO PARA LÂMPADA DICROICA MR16\n'+n+'x SOQUETES INCLUSOS\n'+n+'x LÂMPADA LED DICROICA MR16 GU10 7W\n\n-- ESPECIFICAÇÕES SPOT --\n\nDimensões Quadrado: 10x10x10mm\nPeso: 150g\nDirecionamento do facho através aro direcionador\nProduto feito em ABS, não amarela, não amassa, não oxida e não risca.\n\n-- INFORMAÇÕES TÉCNICAS DA LÂMPADA --\n\nLuz Quente - 2700k/3000k (Enviado conforme disponibilidade)\nFluxo Luminoso: 450lm\nLuz Neutra - 4000k\nFluxo Luminoso: 450lm\nLuz Fria - 6500k\nFluxo Luminoso: 450lm\n\nPotência: 6,5W ou 7W dependendo da disponibilidade\nÂngulo: 24º\nIntensidade Luminosa: 1200cd\nIRC: >=80\nDimerizável: Não\nNível de Proteção: IP40\nSoquete: Gu10\nTamanho Produto: D50*H56mm\nPeso Produto: 50g\nTensão: Bivolt (110V/220V)\nEquiv. Incandescente: 35W';}
 
 var DESCS={
-  '4.8':{titulo:function(n,sp,lp,cor,tw){return 'Kit '+n+'x '+sp+' + '+n+'x '+lp+' Cor '+cor+' '+tw},desc:desc48,num:'4,8'},
+  '4.8':{titulo:function(n,sp,lp,cor,tw){return 'Kit '+n+'x '+sp+' + '+n+'x '+lp+' Cor '+cor+' '+tw},stellaTit:null,desc:desc48,num:'4,8'},
   '6':  {titulo:function(n,sp,lp,cor,tw,sw){return 'Kit '+n+'x '+sp+' + '+n+'x Lâmpada MR16 6W Stella Cor '+cor+' / '+sw},desc:desc6,num:'6'},
   '7':  {titulo:function(n,sp,lp,cor,tw){return 'Kit '+n+'x '+sp+' + '+n+'x '+lp+' Cor '+cor+' '+tw},desc:desc7,num:'7'}
 };
 
-function getPot(){return(document.querySelector('#pot-tags .tag.on')||{dataset:{pot:'4.8'}}).dataset.pot}
+function getPot(prefix){return(document.querySelector('#'+(prefix||'')+'pot-tags .tag.on')||{dataset:{pot:'4.8'}}).dataset.pot}
 function getVals(id){return[...document.querySelectorAll('#'+id+' .tag.on')].map(t=>t.dataset.v)}
+function ean13(){var p='789798'+Math.floor(Math.random()*1e6).toString().padStart(6,'0');var s=0;for(var i=0;i<12;i++)s+=parseInt(p[i])*(i%2===0?1:3);return p+(10-(s%10))%10}
+function escH(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function toTSV(rows){return rows.map(function(r){return r.map(function(c){var s=String(c==null?'':c);if(s.indexOf('\n')>=0||s.indexOf('\t')>=0||s.indexOf('"')>=0)return'"'+s.replace(/"/g,'""')+'"';return s}).join('\t')}).join('\n')}
 
-function go(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',i===j));
-  document.querySelectorAll('.pane').forEach((p,j)=>p.classList.toggle('on',i===j));
-  if(i===1)renderFotos();
-  if(i===3)document.getElementById('result-area').style.display='none';
+// ─── FOTO BATCH PARSER ───
+function parseBatch(cor){
+  var raw=document.getElementById('batch-'+cor).value;
+  var urls=raw.split(',').map(s=>s.trim()).filter(s=>s.length>0);
+  cUrls[cor]=urls;
+  renderParsed('parsed-'+cor,urls);
+}
+function aParseB(cor){
+  var raw=document.getElementById('a-batch-'+cor).value;
+  var urls=raw.split(',').map(s=>s.trim()).filter(s=>s.length>0);
+  aUrls[cor]=urls;
+  renderParsed('a-parsed-'+cor,urls);
+}
+function renderParsed(elId,urls){
+  var el=document.getElementById(elId);
+  if(!urls.length){el.innerHTML='';return}
+  el.innerHTML=urls.map(function(u,i){
+    return '<div class="foto-item"><span class="foto-num">'+(i===0?'capa':(i+1)+'ª')+'</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1">'+escH(u)+'</span></div>';
+  }).join('');
 }
 
+// ─── CATÁLOGO TABS ───
+function goC(i){
+  document.querySelectorAll('#view-catalogo .tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  ['cp0','cp1','cp2','cp3'].forEach((id,j)=>{document.getElementById(id).classList.toggle('on',i===j)});
+  if(i===3)document.getElementById('c-result-area').style.display='none';
+}
+
+// ─── ANÚNCIO TABS ───
+function goA(i){
+  document.querySelectorAll('#view-anuncio .tab').forEach((t,j)=>t.classList.toggle('on',i===j));
+  ['ap0','ap1','ap2','ap3'].forEach((id,j)=>{document.getElementById(id).classList.toggle('on',i===j)});
+  if(i===3)document.getElementById('a-result-area').style.display='none';
+}
+
+// ─── CATÁLOGO LOGIC ───
 function tog(el){el.classList.toggle('on')}
 function togQty(el){el.classList.toggle('on')}
 
 function addQty(){
-  var inp=document.getElementById('qty-input');
-  var v=parseInt(inp.value);
+  var inp=document.getElementById('qty-input');var v=parseInt(inp.value);
   if(!v||v<1){alert('Digite uma quantidade válida.');return}
   var c=document.getElementById('qty-tags');
   var ex=[...c.querySelectorAll('.tag')].find(t=>parseInt(t.dataset.v)===v);
   if(ex){ex.classList.add('on');inp.value='';return}
-  var tag=document.createElement('span');
-  tag.className='tag on tag-custom';tag.dataset.v=String(v);
+  var tag=document.createElement('span');tag.className='tag on';tag.dataset.v=String(v);
+  tag.style.cssText='display:flex;align-items:center;gap:6px';
   var txt=document.createTextNode(v+'x\u00a0');
-  var rm=document.createElement('span');rm.className='rm';rm.textContent='×';
+  var rm=document.createElement('span');rm.textContent='×';rm.style.cssText='font-size:14px;opacity:.7;cursor:pointer';
   rm.onclick=function(e){e.stopPropagation();tag.remove()};
-  tag.onclick=function(e){if(e.target.classList.contains('rm'))return;tag.classList.toggle('on')};
-  tag.appendChild(txt);tag.appendChild(rm);
-  c.appendChild(tag);inp.value='';
+  tag.onclick=function(e){if(e.target===rm)return;tag.classList.toggle('on')};
+  tag.appendChild(txt);tag.appendChild(rm);c.appendChild(tag);inp.value='';
 }
 document.getElementById('qty-input').addEventListener('keydown',function(e){if(e.key==='Enter')addQty()});
 
@@ -474,54 +618,11 @@ function updatePrev(){
     document.getElementById('desc-prev').textContent=DESCS[pot].desc(n);
   }
 }
-function escH(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+['nome_spot','nome_lamp','stella_spot'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',updatePrev)});
 
-updatePrev();
-
-function renderFotos(){
-  var cors=getVals('cor-tags');
-  var el=document.getElementById('foto-sections');el.innerHTML='';
-  cors.forEach(function(cor){
-    var key=cor.toLowerCase();
-    if(!urls[key])urls[key]=Array(8).fill('');
-    var sec=document.createElement('div');sec.className='card';
-    sec.innerHTML='<div class="card-label">Fotos — '+cor+'</div>';
-    var list=document.createElement('div');list.className='url-list';
-    function rl(){
-      list.innerHTML='';
-      (urls[key]||[]).forEach(function(v,i){
-        var row=document.createElement('div');row.className='url-row';
-        var inp=document.createElement('input');inp.type='text';inp.value=v;
-        inp.placeholder=i===0?'URL da capa (obrigatória)':'URL foto '+(i+1)+' (opcional)';
-        inp.addEventListener('input',function(){urls[key][i]=this.value});
-        row.appendChild(inp);
-        if(urls[key].length>1){
-          var btn=document.createElement('button');btn.textContent='×';
-          btn.onclick=function(){urls[key].splice(i,1);rl()};
-          row.appendChild(btn);
-        }
-        list.appendChild(row);
-      });
-    }
-    rl();
-    sec.appendChild(list);
-    var ab=document.createElement('button');ab.className='add-url-btn';ab.textContent='+ adicionar foto';
-    ab.onclick=function(){if(urls[key].length<10){urls[key].push('');rl()}};
-    sec.appendChild(ab);
-    el.appendChild(sec);
-  });
-}
-
-function ean13(){
-  var p='789798'+Math.floor(Math.random()*1e6).toString().padStart(6,'0');
-  var s=0;for(var i=0;i<12;i++)s+=parseInt(p[i])*(i%2===0?1:3);
-  return p+(10-(s%10))%10;
-}
-
-function gerar(){
+function gerarCatalogo(){
   var qtys=getVals('qty-tags').map(Number).sort((a,b)=>a-b);
-  var cors=getVals('cor-tags');
-  var temps=getVals('temp-tags');
+  var cors=getVals('cor-tags');var temps=getVals('temp-tags');
   if(!qtys.length||!cors.length||!temps.length){alert('Selecione ao menos 1 quantidade, 1 cor e 1 temperatura.');return}
   var pot=getPot(),spec=DESCS[pot],isS=pot==='6';
   var spot=isS?document.getElementById('stella_spot').value:document.getElementById('nome_spot').value;
@@ -530,81 +631,138 @@ function gerar(){
   var modelo=isS?document.getElementById('modelo_s').value:document.getElementById('modelo').value;
   var volt=isS?document.getElementById('voltagem_s').value:document.getElementById('voltagem').value;
   var tl=isS?document.getElementById('tipo_luz_s').value:document.getElementById('tipo_luz').value;
-  var comp=document.getElementById('d_comp').value;
-  var larg=document.getElementById('d_larg').value;
-  var alt=document.getElementById('d_alt').value;
-
-  var cols=['Título','EAN','Img1','Img2','Img3','Img4','Img5','Img6','Img7','Img8','Img9','Img10',
-    'Descrição','Marca','Modelo','Formato','Unid.Kit','Voltagem','Cor da luz','Temp.cor','Unid.',
-    'Cor','Cor princ.','Materiais','Lâmpadas','Potência','Unid.','Tipo luz','Alim.','Formato lum.',
-    'Montagem','App.','Cap.','Sem fio','Comp.','Unid.','Larg.','Unid.','Alt.','Unid.','MPN','Anatel'];
-
+  var comp=document.getElementById('d_comp').value,larg=document.getElementById('d_larg').value,alt=document.getElementById('d_alt').value;
+  var cols=['Erros','Título','EAN','Img1','Img2','Img3','Img4','Img5','Img6','Img7','Img8','Img9','Img10','Descrição','Marca','Modelo','Formato','Unid.Kit','Voltagem','Cor da luz','Cor','Cor princ.','Materiais','Lâmpadas','Potência','Unid.','Tipo luz','Alim.','Formato lum.','Montagem','App.','Cap.','Sem fio','Comp.','Unid.','Larg.','Unid.','Alt.','Unid.','MPN','Anatel'];
   var rows=[],eans=[];
-  outer:for(var qi=0;qi<qtys.length;qi++){
-    for(var ci=0;ci<cors.length;ci++){
-      for(var ti=0;ti<TEMPS.length;ti++){
-        if(rows.length>=25)break outer;
-        var tm=TEMPS[ti];
-        if(temps.indexOf(tm.label)<0)continue;
-        var qty=qtys[qi],cor=cors[ci];
-        var titulo=spec.titulo(qty,spot,lamp,cor,tm.word,tm.sw);
-        var ean=ean13();
-        eans.push({titulo:titulo,ean:ean});
-        var key=cor.toLowerCase();
-        var ph=((urls[key]||[]).concat(Array(10).fill(''))).slice(0,10);
-        var desc=spec.desc(qty);
-        rows.push([titulo,ean].concat(ph).concat([
-          desc,marca,modelo,'Kit',qty,volt,
-          tm.label,tm.k,'K',cor,cor,'Plástico, ABS','Sim',
-          spec.num,'W',tl,'Corrente Elétrica',
-          'Spot Sobrepor Quadrado','Teto','Não compatível',
-          qty,'Não',comp,'cm',larg,'cm',alt,'cm','',''
-        ]));
-      }
-    }
-  }
-
-  document.getElementById('badge-count').textContent=rows.length+' linha'+(rows.length!==1?'s':'');
-  document.getElementById('badge-warn').style.display=rows.length>=25?'inline-block':'none';
-
-  tsv=rows.map(function(r){
-    return r.map(function(c){
-      var s=String(c==null?'':c);
-      if(s.indexOf('\n')>=0||s.indexOf('\t')>=0||s.indexOf('"')>=0)
-        return '"'+s.replace(/"/g,'""')+'"';
-      return s;
-    }).join('\t');
-  }).join('\n');
-
+  outer:for(var qi=0;qi<qtys.length;qi++){for(var ci=0;ci<cors.length;ci++){for(var ti=0;ti<TEMPS.length;ti++){
+    if(rows.length>=25)break outer;
+    var tm=TEMPS[ti];if(temps.indexOf(tm.label)<0)continue;
+    var qty=qtys[qi],cor=cors[ci];
+    var titulo=spec.titulo(qty,spot,lamp,cor,tm.word,tm.sw);
+    var ean=ean13();eans.push({titulo,ean});
+    var key=cor.toLowerCase();
+    var ph=((cUrls[key]||[]).concat(Array(10).fill(''))).slice(0,10);
+    var desc=spec.desc(qty);
+    rows.push(['',titulo,ean].concat(ph).concat([desc,marca,modelo,'Kit',qty,volt,tm.label,cor,cor,'Plástico, ABS','Sim',spec.num,'W',tl,'Corrente Elétrica','Spot Sobrepor Quadrado','Teto','Não compatível',qty,'Não',comp,'cm',larg,'cm',alt,'cm','','']));
+  }}}
+  cTsv=toTSV(rows);
+  document.getElementById('c-badge-count').textContent=rows.length+' linha'+(rows.length!==1?'s':'');
+  document.getElementById('c-badge-warn').style.display=rows.length>=25?'inline-block':'none';
   var prev=rows.slice(0,3);
   var tbl='<table><thead><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>';
-  prev.forEach(function(r){
-    tbl+='<tr>'+r.map(function(c){
-      var s=String(c==null?'':c).replace(/\n/g,' ↵ ');
-      return'<td title="'+escH(s)+'">'+escH(s.substring(0,22))+'</td>';
-    }).join('')+'</tr>';
-  });
+  prev.forEach(r=>{tbl+='<tr>'+r.map(c=>'<td title="'+escH(String(c).replace(/\n/g,' '))+'">'+escH(String(c).substring(0,22).replace(/\n/g,' '))+'</td>').join('')+'</tr>'});
   tbl+='</tbody></table>';
-  document.getElementById('preview-tbl').innerHTML=tbl;
-
-  var el=document.getElementById('ean-list');
-  el.innerHTML='<p style="font-size:11px;color:var(--text-faint);margin-bottom:8px">Aleatórios com dígito verificador válido — substitua por EANs reais antes de enviar ao ML.</p>';
-  eans.forEach(function(e){
-    el.innerHTML+='<div class="ean-row"><span class="ean-titulo">'+escH(e.titulo.substring(0,65))+'</span><span class="ean-code">'+e.ean+'</span></div>';
-  });
-
-  document.getElementById('result-area').style.display='block';
-  document.getElementById('gen-area').innerHTML='<button class="btn btn-primary btn-block" onclick="gerar()">Regerar</button>';
+  document.getElementById('c-preview-tbl').innerHTML=tbl;
+  var el=document.getElementById('c-ean-list');
+  el.innerHTML='<p style="font-size:11px;color:var(--text-faint);margin-bottom:8px">Aleatórios com dígito verificador válido — substitua por EANs reais antes de enviar.</p>';
+  eans.forEach(e=>{el.innerHTML+='<div class="ean-row"><span class="ean-titulo">'+escH(e.titulo.substring(0,65))+'</span><span class="ean-code">'+e.ean+'</span></div>'});
+  document.getElementById('c-result-area').style.display='block';
+  document.getElementById('c-gen-area').innerHTML='<button class="btn btn-primary btn-block" onclick="gerarCatalogo()">Regerar</button>';
 }
+function copiarC(){if(!cTsv)return;navigator.clipboard.writeText(cTsv).then(function(){var b=document.getElementById('c-copy-btn');b.textContent='Copiado!';b.classList.add('done');setTimeout(function(){b.textContent='Copiar tudo (TSV)';b.classList.remove('done')},2500)})}
 
-function copiar(){
-  if(!tsv)return;
-  navigator.clipboard.writeText(tsv).then(function(){
-    var b=document.getElementById('copy-btn');
-    b.textContent='Copiado!';b.classList.add('done');
-    setTimeout(function(){b.textContent='Copiar tudo (TSV)';b.classList.remove('done')},2500);
-  });
+// ─── ANÚNCIO LOGIC ───
+function aTog(el){el.classList.toggle('on')}
+function aTogQty(el){el.classList.toggle('on')}
+function aAddQty(){
+  var inp=document.getElementById('a-qty-input');var v=parseInt(inp.value);
+  if(!v||v<1){alert('Digite uma quantidade válida.');return}
+  var c=document.getElementById('a-qty-tags');
+  var ex=[...c.querySelectorAll('.tag')].find(t=>parseInt(t.dataset.v)===v);
+  if(ex){ex.classList.add('on');inp.value='';return}
+  var tag=document.createElement('span');tag.className='tag on';tag.dataset.v=String(v);
+  tag.style.cssText='display:flex;align-items:center;gap:6px';
+  var txt=document.createTextNode(v+'x\u00a0');
+  var rm=document.createElement('span');rm.textContent='×';rm.style.cssText='font-size:14px;opacity:.7;cursor:pointer';
+  rm.onclick=function(e){e.stopPropagation();tag.remove()};
+  tag.onclick=function(e){if(e.target===rm)return;tag.classList.toggle('on')};
+  tag.appendChild(txt);tag.appendChild(rm);c.appendChild(tag);inp.value='';
 }
+document.getElementById('a-qty-input').addEventListener('keydown',function(e){if(e.key==='Enter')aAddQty()});
+
+function aSelPot(el){
+  document.querySelectorAll('#a-pot-tags .tag').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  var s=el.dataset.pot==='6';
+  document.getElementById('a-campos-padrao').style.display=s?'none':'block';
+  document.getElementById('a-campos-stella').style.display=s?'block':'none';
+  aUpdatePrev();
+}
+function aUpdatePrev(){
+  var pot=getPot('a-'),n=16;
+  if(pot==='6'){
+    var sp=document.getElementById('a-stella_spot').value;
+    document.getElementById('a-titulo-prev-stella').innerHTML='<strong>Exemplo:</strong> '+escH(DESCS['6'].titulo(n,sp,'','Branco','Branco Neutro','Branco Neutro 4000K'));
+  } else {
+    var spot=document.getElementById('a-nome_spot').value;
+    var lamp=document.getElementById('a-nome_lamp').value;
+    document.getElementById('a-titulo-prev').innerHTML='<strong>Exemplo:</strong> '+escH(DESCS[pot].titulo(n,spot,lamp,'Preto','Branco Quente'));
+  }
+}
+['a-nome_spot','a-nome_lamp','a-stella_spot'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',aUpdatePrev)});
+
+function gerarAnuncio(){
+  var qtys=getVals('a-qty-tags').map(Number).sort((a,b)=>a-b);
+  var cors=getVals('a-cor-tags');var temps=getVals('a-temp-tags');
+  if(!qtys.length||!cors.length||!temps.length){alert('Selecione ao menos 1 quantidade, 1 cor e 1 temperatura.');return}
+  var pot=getPot('a-'),spec=DESCS[pot],isS=pot==='6';
+  var spot=isS?document.getElementById('a-stella_spot').value:document.getElementById('a-nome_spot').value;
+  var lamp=isS?'':document.getElementById('a-nome_lamp').value;
+  var marca=document.getElementById('a-marca').value;
+  var modelo=document.getElementById('a-modelo').value;
+  var preco=document.getElementById('a-preco').value;
+  var estoque=document.getElementById('a-estoque').value;
+  var volt=document.getElementById('a-voltagem').value;
+  var tl=document.getElementById('a-tipo_luz').value;
+  var formato=document.getElementById('a-formato').value;
+  var gTipo=document.getElementById('a-garantia-tipo').value;
+  var gTempo=document.getElementById('a-garantia-tempo').value;
+  var gUnid=document.getElementById('a-garantia-unidade').value;
+  var larg=document.getElementById('a-larg').value;
+  var alt=document.getElementById('a-alt').value;
+  var prof=document.getElementById('a-prof').value;
+  var peso=document.getElementById('a-peso').value;
+
+  // Colunas da planilha Anunciar:
+  // Código catálogo ML | Título | Qtd chars | Condição | EAN | Varia cor | Varia volt | Fotos | SKU | Estoque | Preço | Formato | Unid kit | Descrição | Largura | Altura | Prof | Peso | Tipo anúncio | Tarifa | Forma envio | Custo envio | Retirar | Garantia tipo | Garantia tempo | Garantia unidade | Loja Oficial | Marca | Modelo | Materiais | Lâmpadas | Cor da luz | Anatel | Potência | Unid pot | Tipo fonte | Tipo alim | Formato lum | Lugares | Apps | Cap lâmpadas | Sem fio
+  var cols=['Cód.Catálogo','Título','Chars','Condição','EAN','Varia Cor','Varia Volt','Fotos','SKU','Estoque','Preço','Formato','Unid.Kit','Descrição','Largura','Altura','Prof.','Peso','Tipo anúncio','Tarifa','Forma envio','Custo envio','Retirar','Garantia tipo','Garantia tempo','Garantia unid.','Loja Oficial','Marca','Modelo','Materiais','Lâmpadas','Cor da luz','Anatel','Potência','Unid.','Tipo fonte','Tipo alim.','Formato lum.','Montagem','Apps','Cap. lâmp.','Sem fio'];
+
+  var rows=[],eans=[];
+  outer:for(var qi=0;qi<qtys.length;qi++){for(var ci=0;ci<cors.length;ci++){for(var ti=0;ti<TEMPS.length;ti++){
+    if(rows.length>=200)break outer; // sem limite rígido no anúncio
+    var tm=TEMPS[ti];if(temps.indexOf(tm.label)<0)continue;
+    var qty=qtys[qi],cor=cors[ci];
+    var titulo=spec.titulo(qty,spot,lamp,cor,tm.word,tm.sw);
+    var ean=ean13();eans.push({titulo,ean});
+    var key=cor.toLowerCase();
+    var fotosArr=(aUrls[key]||[]).concat(Array(10).fill('')).slice(0,10);
+    var fotos=fotosArr.filter(f=>f).join(',');
+    var desc=spec.desc(qty);
+    rows.push([
+      '',titulo,'','Novo',ean,cor,volt,fotos,'',estoque,preco,formato,qty,desc,
+      larg,alt,prof,peso,'Clássico','-','Mercado Envios | Mercado Envios Flex','Você oferece frete grátis','Não aceito',
+      gTipo,gTempo,gUnid,'Lumnia Iluminacao',marca,modelo,'Plástico, ABS','Sim',
+      tm.label,'',spec.num,'W',tl,'Corrente Elétrica','Spot Sobrepor Quadrado','Teto','Não compatível',qty,'Não'
+    ]);
+  }}}
+
+  aTsv=toTSV(rows);
+  document.getElementById('a-badge-count').textContent=rows.length+' linha'+(rows.length!==1?'s':'');
+  var prev=rows.slice(0,3);
+  var tbl='<table><thead><tr>'+cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>';
+  prev.forEach(r=>{tbl+='<tr>'+r.map(c=>'<td title="'+escH(String(c).replace(/\n/g,' '))+'">'+escH(String(c).substring(0,20).replace(/\n/g,' '))+'</td>').join('')+'</tr>'});
+  tbl+='</tbody></table>';
+  document.getElementById('a-preview-tbl').innerHTML=tbl;
+  var el=document.getElementById('a-ean-list');
+  el.innerHTML='<p style="font-size:11px;color:var(--text-faint);margin-bottom:8px">Aleatórios com dígito verificador válido — substitua por EANs reais antes de enviar.</p>';
+  eans.forEach(e=>{el.innerHTML+='<div class="ean-row"><span class="ean-titulo">'+escH(e.titulo.substring(0,65))+'</span><span class="ean-code">'+e.ean+'</span></div>'});
+  document.getElementById('a-result-area').style.display='block';
+  document.getElementById('a-gen-area').innerHTML='<button class="btn btn-primary btn-block" onclick="gerarAnuncio()">Regerar</button>';
+}
+function copiarA(){if(!aTsv)return;navigator.clipboard.writeText(aTsv).then(function(){var b=document.getElementById('a-copy-btn');b.textContent='Copiado!';b.classList.add('done');setTimeout(function(){b.textContent='Copiar tudo (TSV)';b.classList.remove('done')},2500)})}
+
+// init
+updatePrev();aUpdatePrev();
 </script>
 </body>
 </html>
