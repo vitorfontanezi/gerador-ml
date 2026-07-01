@@ -632,7 +632,7 @@ function gerarCatalogo(){
   var volt=isS?document.getElementById('voltagem_s').value:document.getElementById('voltagem').value;
   var tl=isS?document.getElementById('tipo_luz_s').value:document.getElementById('tipo_luz').value;
   var comp=document.getElementById('d_comp').value,larg=document.getElementById('d_larg').value,alt=document.getElementById('d_alt').value;
-  var cols=['Erros','Título','EAN','Img1','Img2','Img3','Img4','Img5','Img6','Img7','Img8','Img9','Img10','Descrição','Marca','Modelo','Formato','Unid.Kit','Voltagem','Cor da luz','Cor','Cor princ.','Materiais','Lâmpadas','Potência','Unid.','Tipo luz','Alim.','Formato lum.','Montagem','App.','Cap.','Sem fio','Comp.','Unid.','Larg.','Unid.','Alt.','Unid.','MPN','Anatel'];
+  var cols=['Título','EAN','Img1','Img2','Img3','Img4','Img5','Img6','Img7','Img8','Img9','Img10','Descrição','Marca','Modelo','Formato','Unid.Kit','Voltagem','Cor da luz','Cor','Cor princ.','Materiais','Lâmpadas','Potência','Unid.','Tipo luz','Alim.','Formato lum.','Montagem','App.','Cap.','Sem fio','Volt.bat.','AGID','Tipo pilha','Comp.','Unid.','Larg.','Unid.','Alt.','Unid.','MPN','Anatel'];
   var rows=[],eans=[];
   outer:for(var qi=0;qi<qtys.length;qi++){for(var ci=0;ci<cors.length;ci++){for(var ti=0;ti<TEMPS.length;ti++){
     if(rows.length>=25)break outer;
@@ -643,7 +643,7 @@ function gerarCatalogo(){
     var key=cor.toLowerCase();
     var ph=((cUrls[key]||[]).concat(Array(10).fill(''))).slice(0,10);
     var desc=spec.desc(qty);
-    rows.push(['',titulo,ean].concat(ph).concat([desc,marca,modelo,'Kit',qty,volt,tm.label,cor,cor,'Plástico, ABS','Sim',spec.num,'W',tl,'Corrente Elétrica','Spot Sobrepor Quadrado','Teto','Não compatível',qty,'Não',comp,'cm',larg,'cm',alt,'cm','','']));
+    rows.push([titulo,ean].concat(ph).concat([desc,marca,modelo,'Kit',qty,volt,tm.label,cor,cor,'Plástico, ABS','Sim',spec.num,'W',tl,'Corrente Elétrica','Spot Sobrepor Quadrado','Teto','Não compatível',qty,'Não','','','',comp,'cm',larg,'cm',alt,'cm','','']));
   }}}
   cTsv=toTSV(rows);
   document.getElementById('c-badge-count').textContent=rows.length+' linha'+(rows.length!==1?'s':'');
